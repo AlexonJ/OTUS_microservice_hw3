@@ -1,0 +1,20 @@
+-- REVOKE USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public FROM pguser;
+-- REVOKE ALL PRIVILEGES ON DATABASE postgres FROM pguser;
+-- REVOKE ALL PRIVILEGES ON SCHEMA public FROM pguser;
+-- DROP USER pguser;
+-- DROP TABLE users;
+
+CREATE USER pguser LOGIN;
+
+GRANT ALL PRIVILEGES ON DATABASE postgres TO pguser;
+
+CREATE TABLE IF NOT EXISTS public.users
+(
+    id         serial PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name  VARCHAR(50),
+    email      VARCHAR(255),
+    phone      VARCHAR(12)
+);
+GRANT ALL PRIVILEGES ON TABLE users TO pguser;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO pguser;

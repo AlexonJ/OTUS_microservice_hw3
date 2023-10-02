@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CrudUsersApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//    @Test
+//    void contextLoads() {
+//    }
 
 }

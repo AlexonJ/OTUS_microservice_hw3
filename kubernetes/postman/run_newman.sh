@@ -1,0 +1,1 @@
+newman run User\ CRUD\ application.postman_collection.json --verbose > User\ CRUD\ application.postman_test_run.txt

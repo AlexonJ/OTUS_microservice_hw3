@@ -9,8 +9,3 @@ LABEL release-date="2023-09-30"
 RUN apk --no-cache add postgresql-client
 RUN echo "*:*:*:*:mypass" > ~/.pgpass
 RUN chmod 600 ~/.pgpass
-
-#CMD ["psql", "-h", "$DB_HOST", "-U", "$DB_USERNAME", "$DB_NAME", "-f", "your-migration-script.sql"]
-#CMD ["sh", "-c", "psql --help "]
-CMD ["sh", "-c", "psql -h $DB_HOST -U $DB_USER -d $DB_NAME -p $DB_PORT -W$DB_PASSWORD -f migration_script.sql"]
-CMD ["sh"]

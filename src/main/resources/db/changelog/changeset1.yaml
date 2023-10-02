@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/changeset1.yaml
+  - changeSet:
+      id: 2
+      author: alexey_fadeev
+      comment: "Create admin and user"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "admin"
+              - column:
+                  name: password
+                  value: "admin"
+              - column:
+                  name: email
+                  value: "admin@server.com"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "guest"
+              - column:
+                  name: password
+                  value: "guest"
+              - column:
+                  name: email
+                  value: "guest@server.com"
+      rollback:
+        - delete:
+            tableName: users
+            where: username in ('admin', 'guest')

@@ -1,8 +1,8 @@
-package ru.otus.microarch.homeworks.crudusers.model;
+package ru.otus.microarch.homeworks.crudusers.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -13,16 +13,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "username", nullable = false, unique = true)
+    @JsonProperty("userName")
+    private String username;
+
+    @Column(name = "first_name", nullable = false, unique = true)
+    @JsonProperty("firstName")
     private String firstName;
 
-    @Column(name = "second_name")
-    private String secondName;
+    @Column(name = "last_name")
+    @JsonProperty("lastName")
+    private String lastName;
 
     @Column(name = "email")
+    @JsonProperty("email")
     private String email;
 
     @Column(name = "phone")
+    @JsonProperty("phone")
     private String phone;
 
 }
