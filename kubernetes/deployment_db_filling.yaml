@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-migration
+  namespace: user-crud-app-ns
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      env: dev
+  template:
+    metadata:
+      labels:
+        env: dev
+    spec:
+      containers:
+      - name: db-filling
+        image: alexeyyf/alpine-sql-migration:1.0.5
+        ports:
+        - containerPort: 8001
+        env:
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: app-db-secret
+                key: DB_PASSWORD
+        envFrom:
+          - configMapRef:
+              name: app-config-map

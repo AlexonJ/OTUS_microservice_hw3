@@ -1,0 +1,4 @@
+https://github.com/bitnami/charts/issues/14683
+
+
+psql -h postgresql -U pguser -d postgres-db -p 5435 -f migration_script.sql

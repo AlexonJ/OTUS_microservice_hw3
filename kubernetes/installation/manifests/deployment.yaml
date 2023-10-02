@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-crud-service
+  namespace: user-crud-app-ns
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: user-crud-service-app
+  template:
+    metadata:
+      labels:
+        app: user-crud-service-app
+    spec:
+      containers:
+      - name: user-crud-service-app
+        image: alexeyyf/crud-users-web-app:1.0.6
+        ports:
+        - containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness/
+            port: 8000
+          initialDelaySeconds: 5  # Wait this many seconds before the first probe
+          periodSeconds: 10       # Probe every 10 seconds
+        env:
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: user-crud-app-secret
+                key: DB_PASSWORD
+        envFrom:
+          - configMapRef:
+              name: user-crud-config-map
+

@@ -1,0 +1,1 @@
+helm upgrade postgresql bitnami/postgresql --version 13.0.0 -f postgress-install-settings.yaml

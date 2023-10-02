@@ -1,0 +1,118 @@
+newman
+
+User CRUD application
+
+→ getUser
+  GET http://arch.homework/user/1  
+  200 OK ★ 19ms time ★ 231B↑ 258B↓ size ★ 7↑ 4↓ headers ★ 0 cookies
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 118B
+  │ {"id":1,"userName":"Alex","firstName":"Alexey","lastNa
+  │ me":"Sokolov","email":"asokolov@mail.com","phone":"899
+  │ 98887766"}
+  └
+  prepare   wait   dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  22ms      6ms    742µs        368µs           4ms              6ms        294µs     40ms  
+
+
+→ createUser
+  POST http://arch.homework/user  
+  201 Created ★ 8ms time ★ 437B↑ 275B↓ size ★ 9↑ 4↓ headers ★ 0 cookies
+  ┌ ↑ raw ★ 154B
+  │ {
+  │     "userName": "AlexAS1234",
+  │     "firstName": "Alexander",
+  │     "lastName": "Sokolov",
+  │     "email": "SokolovAS@yandex.ru",
+  │     "phone": "8 888 888888"
+  │ }
+  └ 
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 130B
+  │ {"id":2,"userName":"AlexAS1234","firstName":"Alexander
+  │ ","lastName":"Sokolov","email":"SokolovAS@yandex.ru","
+  │ phone":"8 888 888888"}
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  1ms       552µs   (cache)      (cache)         4ms              1ms        48µs      8ms   
+
+
+→ updateUser
+  PUT http://arch.homework/user/1  
+  200 OK ★ 6ms time ★ 440B↑ 99B↓ size ★ 9↑ 3↓ headers ★ 0 cookies
+  ┌ ↑ raw ★ 156B
+  │ {
+  │     "userName": "AlexAS133",
+  │     "firstName": "Alexander123",
+  │     "lastName": "Sokolov",
+  │     "email": "SokolovAS@yandex.ru",
+  │     "phone": "8 888 888888"
+  │ }
+  └ 
+  ↓ text/plain ★ text ★ plain ★ utf8
+
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  1ms       240µs   (cache)      (cache)         4ms              894µs      43µs      6ms   
+
+
+→ getUser
+  GET http://arch.homework/user/1  
+  200 OK ★ 6ms time ★ 231B↑ 272B↓ size ★ 7↑ 4↓ headers ★ 0 cookies
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 132B
+  │ {"id":1,"userName":"AlexAS133","firstName":"Alexander1
+  │ 23","lastName":"Sokolov","email":"SokolovAS@yandex.ru"
+  │ ,"phone":"8 888 888888"}
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  1ms       157µs   (cache)      (cache)         3ms              1ms        46µs      6ms   
+
+
+→ deleteUser
+  DELETE http://arch.homework/user/1  
+  200 OK ★ 7ms time ★ 437B↑ 99B↓ size ★ 9↑ 3↓ headers ★ 0 cookies
+  ┌ ↑ raw ★ 150B
+  │ {
+  │     "userName": "AlexAS",
+  │     "firstName": "Alexander",
+  │     "lastName": "Sokolov",
+  │     "email": "SokolovAS@yandex.ru",
+  │     "phone": "8 888 888888"
+  │ }
+  └ 
+  ↓ text/plain ★ text ★ plain ★ utf8
+
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  976µs     242µs   (cache)      (cache)         4ms              1ms        41µs      7ms   
+
+
+→ getUser
+  GET http://arch.homework/user/1  
+  400 Bad Request ★ 4ms time ★ 231B↑ 188B↓ size ★ 7↑ 4↓ headers ★ 0 cookies
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 39B
+  │ {"code":0,"message":"No value present"}
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  962µs     139µs   (cache)      (cache)         2ms              908µs      32µs      4ms   
+
+
+[90m┌─────────────────────────[39m[90m┬─────────────────────[39m[90m┬────────────────────┐[39m
+[90m│[39m                         [90m│[39m            executed [90m│[39m             failed [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────────[39m[90m┼────────────────────┤[39m
+[90m│[39m              iterations [90m│[39m                   1 [90m│[39m                  0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────────[39m[90m┼────────────────────┤[39m
+[90m│[39m                requests [90m│[39m                   6 [90m│[39m                  0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────────[39m[90m┼────────────────────┤[39m
+[90m│[39m            test-scripts [90m│[39m                   6 [90m│[39m                  0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────────[39m[90m┼────────────────────┤[39m
+[90m│[39m      prerequest-scripts [90m│[39m                   6 [90m│[39m                  0 [90m│[39m
+[90m├─────────────────────────[39m[90m┼─────────────────────[39m[90m┼────────────────────┤[39m
+[90m│[39m              assertions [90m│[39m                   0 [90m│[39m                  0 [90m│[39m
+[90m├─────────────────────────┴─────────────────────┴────────────────────┤[39m
+[90m│[39m total run duration: 195ms                                          [90m│[39m
+[90m├────────────────────────────────────────────────────────────────────┤[39m
+[90m│[39m total data received: 419B (approx)                                 [90m│[39m
+[90m├────────────────────────────────────────────────────────────────────┤[39m
+[90m│[39m average response time: 8ms [min: 4ms, max: 19ms, s.d.: 4ms]        [90m│[39m
+[90m├────────────────────────────────────────────────────────────────────┤[39m
+[90m│[39m average DNS lookup time: 742µs [min: 742µs, max: 742µs, s.d.: 0µs] [90m│[39m
+[90m├────────────────────────────────────────────────────────────────────┤[39m
+[90m│[39m average first byte time: 4ms [min: 2ms, max: 4ms, s.d.: 849µs]     [90m│[39m
+[90m└────────────────────────────────────────────────────────────────────┘[39m

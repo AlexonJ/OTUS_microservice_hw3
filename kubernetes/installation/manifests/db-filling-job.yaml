@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-job
+  namespace: user-crud-app-ns
+spec:
+  template:
+    metadata:
+      name: b-migration-job
+    spec:
+      containers:
+        - name: database-migration-container
+          image: alexeyyf/alpine-sql-migration:1.0.6
+          command: ["sh", "-c", "echo $DB_HOST':*:'$DB_NAME':'$DB_USER':'$DB_PASSWORD > ~/.pgpass && \
+          cat < ~/.pgpass && \
+          psql -h $DB_HOST -U $DB_USER -d $DB_NAME -p $DB_PORT -w -f /opt/migration_script.sql"]
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: user-crud-app-secret
+                  key: DB_PASSWORD
+          envFrom:
+            - configMapRef:
+                name: user-crud-config-map
+          volumeMounts:
+            - name: create-db
+              mountPath: /opt/migration_script.sql
+              subPath: migration_script.sql
+      volumes:
+        - name: create-db
+          configMap:
+            name: user-crud-config-map
+            defaultMode: 0755
+      restartPolicy: Never

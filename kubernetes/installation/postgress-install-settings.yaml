@@ -1,0 +1,15 @@
+global:
+  postgresql:
+    auth:
+      database: postgres-db
+      username: pguser
+      password: mypass
+      enablePostgresUser: true
+      postgresPassword: mypass
+
+    service:
+      ports:
+        postgresql: 5435
+
+volumePermissions:
+  enabled: true

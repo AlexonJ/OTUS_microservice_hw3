@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-crud-config-map
+  namespace: user-crud-app-ns
+data:
+  DB_HOST: "postgresql"
+  DB_PORT: "5435"
+  DB_NAME: "postgres-db"
+  DB_USER: "pguser"
+  TEST_STRING: "Test string from configmap"
+  migration_script.sql: |
+    CREATE TABLE IF NOT EXISTS users (
+    id serial PRIMARY KEY,
+    username VARCHAR ( 50 ) UNIQUE NOT NULL,
+    first_name VARCHAR ( 50 ) NOT NULL,
+    last_name VARCHAR ( 50 ),
+    email VARCHAR ( 255 ),
+    phone VARCHAR ( 12 )
+    );
+    
+    INSERT INTO public.users(username, first_name, last_name, email, phone)
+    VALUES ('Alex', 'Alexey', 'Sokolov', 'asokolov@mail.com', '89998887766');
